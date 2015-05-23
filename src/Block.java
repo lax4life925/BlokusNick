@@ -10,10 +10,10 @@ public class Block {
 	private Location relativeLoc;
 	private Location screenLoc;
 	private Piece piece;
-	public Block(Color c,Piece p, int relX, int relY) {
+	public Block(Piece p, int relX, int relY) {
 		// TODO Auto-generated constructor stub
 		piece = p;
-		color = c;
+		color = p.getColor();
 		relativeLoc = new Location(relX,relY);
 		screenLoc = new Location(relX*Block.SIZE + p.getX(), relY*Block.SIZE + p.getY());
 	}

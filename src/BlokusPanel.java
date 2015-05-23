@@ -149,16 +149,16 @@ public class BlokusPanel extends JPanel{
 	public boolean dropPiece(int x, int y){
 		Location secondClick = new Location (x,y);
 		Location secondClkBrd = secondClick.convertToGrid();
+		Player myTurn = whosturn();
 		if(board.onGrid(secondClkBrd)){
 			if(board.validPlay(x,y,selectedB,selectedP)){
 				this.piecesUsed.add(selectedP);
 				for(Block block : selectedP.getBlockList()){
 					board.add(block);
 				}
-				boolean remove = false;
-				Player myTurn = whosturn();
+				
 				myTurn.getAvailablePieces().remove(selectedP);
-				System.out.print("Valid move");
+				System.out.println("Valid move");
 			}
 			else{
 				System.out.println("Invalid move");

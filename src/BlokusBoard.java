@@ -69,9 +69,9 @@ public class BlokusBoard {
 				if(play.getStartingLocation().getX() == loc.getX() && play.getStartingLocation().getY() == loc.getY())
 					startingAtRightSpot = true;
 			}
-			System.out.println("X : " + loc.getX());
-			System.out.println("Y : " + loc.getY());
-			System.out.print("Play X and Y: " + play.getStartingLocation().getX() + play.getStartingLocation().getY());
+		//	System.out.println("X : " + loc.getX());
+		//	System.out.println("Y : " + loc.getY());
+		//	System.out.print("Play X and Y: " + play.getStartingLocation().getX() + play.getStartingLocation().getY());
 		
 		}
 		
@@ -126,10 +126,10 @@ public class BlokusBoard {
 			int yn = g.getY();
 			if(onGrid(g)){
 				if(arr[xn][yn]!=null){
-				if(arr[xn][yn].getColor()==c){
-					System.out.println("it's true!!");
-					return true;
-				}
+					if(arr[xn][yn].getColor().equals(c)){
+						//System.out.println("it's true!!");
+						return true;
+					}
 				}
 			}
 		}
