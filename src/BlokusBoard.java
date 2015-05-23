@@ -37,11 +37,19 @@ public class BlokusBoard {
 			}
 				
 		}
+		Player current = blokusPanel.whosturn();
+		if(current.firstMove()){
+			g.setColor(current.getColor());
+			Location loc = current.getStartingLocation().toScreen();
+			g.drawOval(loc.getX(), loc.getY(), Block.SIZE, Block.SIZE);
+		}
+			
 	}
 
 	public boolean validPlay(int xn, int yn, Block b, Piece p) {
 		// TODO Auto-generated method stub
 		boolean touchingCorner = false;
+		boolean startingAtRightSpot = false;
 		Color c = b.getColor();
 		List<Location> locList = new ArrayList<Location>();
 		
@@ -52,13 +60,30 @@ public class BlokusBoard {
 		for(Location loc : locList){
 			//I took out the exclamation point to follow how I wrote the methods
 			//you can change the return statements on the methods if you don't like the logic
-			if((this.checkOccupied(loc,c) || this.checkAdjacent(loc,c)))
+			if(this.checkOccupied(loc,c) || this.checkAdjacent(loc,c))
 				return false;
 			if(touchingCorner(loc,c))
 				touchingCorner = true;
+			Player play = p.getPlayer();
+			if(play.firstMove()){
+				if(play.getStartingLocation().getX() == loc.getX() && play.getStartingLocation().getY() == loc.getY())
+					startingAtRightSpot = true;
+			}
+			System.out.println("X : " + loc.getX());
+			System.out.println("Y : " + loc.getY());
+			System.out.print("Play X and Y: " + play.getStartingLocation().getX() + play.getStartingLocation().getY());
+		
 		}
-		// we need to remember to uncomment touching corner!!!
-		//return true;
+		
+		if(p.getPlayer().firstMove()){
+			if(startingAtRightSpot){
+				System.out.println("Started at right spot");
+				p.getPlayer().firstMoveComplete();
+				return true;
+			}
+			return false;
+		}
+		
 		return touchingCorner;
 	}
 
@@ -129,6 +154,7 @@ public class BlokusBoard {
 		arr[loc.getX()][loc.getY()] = block;
 		}
 		block.setScreenLoc(loc.toScreen());
+		blokusPanel.nextTurn();
 		blokusPanel.repaint();
 	}
 	public boolean onGrid (Location loc){

@@ -80,7 +80,6 @@ public class MyListener extends MouseInputAdapter implements ActionListener {
 		
 		int x = e.getX();
 		int y = e.getY();
-		if(panel.insideUsablePiece(x,y))
 			if(panel.firstClick==null){
 				if(panel.selectPiece(x,y))
 					active = true;

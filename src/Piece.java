@@ -3,13 +3,17 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JComponent;
+
 
 public abstract class Piece {
 	List<Block> blockList = new ArrayList<Block>();
 	 Color color;
 	 int x;
 	 int y;
+	 Player player;
 	public Piece(Player p,int locX, int locY){
+		player = p;
 		x = locX;
 		y = locY;
 		color = p.getColor();
@@ -66,7 +70,8 @@ public abstract class Piece {
 	public static void fill(List<Piece> list, Player p) {
 		// TODO Auto-generated method stub
 		list.add(new Corner(p));
-		}
+		list.add(new ThreeLong(p));
+	}
 
 	public List<Block> getBlockList() {
 		// TODO Auto-generated method stub
@@ -87,4 +92,10 @@ public abstract class Piece {
 			b.setScreenLoc(b.getRelativeLoc().getX()*Block.SIZE + getX(), b.getRelativeLoc().getY()*Block.SIZE + getY());
 		}
 	}
+
+	public Player getPlayer() {
+		// TODO Auto-generated method stub
+		return player;
+	}
+
 }

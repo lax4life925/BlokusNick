@@ -10,17 +10,17 @@ public class Block {
 	private Location relativeLoc;
 	private Location screenLoc;
 	private Piece piece;
-	public Block(Color red,Piece p, int relX, int relY) {
+	public Block(Color c,Piece p, int relX, int relY) {
 		// TODO Auto-generated constructor stub
 		piece = p;
-		color = red;
+		color = c;
 		relativeLoc = new Location(relX,relY);
 		screenLoc = new Location(relX*Block.SIZE + p.getX(), relY*Block.SIZE + p.getY());
 	}
 
 	public Color getColor() {
 		// TODO Auto-generated method stub
-		return Color.red;
+		return color;
 	}
 	//relative to piece
 	public void setRelativeLoc(int x, int y){

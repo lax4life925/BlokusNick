@@ -10,4 +10,9 @@ public class ThreeLong extends Piece{
 
 	}
 
+	public ThreeLong(Player p) {
+		// TODO Auto-generated constructor stub
+		this(p,800,600);
+	}
+
 }

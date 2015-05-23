@@ -10,14 +10,15 @@ import javax.swing.JPanel;
 
 public class BlokusPanel extends JPanel{
 	BlokusBoard board;
-	private int GameTurn=7;
+	private int GameTurn=0;
 	Location firstClick;
 	Piece selectedP;
 	Block selectedB;
 	List<Player> playerList = new ArrayList<Player>();
-	//	Player player2;
-	//	Player player3;
-	//	Player player4;
+	 	Player player1;
+		Player player2;
+		Player player3;
+		Player player4;
 	MyListener listen= new MyListener(this);
 	//player blue's turn = 0
 	//player yellow's turn = 1
@@ -31,9 +32,23 @@ public class BlokusPanel extends JPanel{
 		addMouseMotionListener(listen);
 		setPreferredSize(new Dimension(BlokusFrame.width,BlokusFrame.height));
 		board = new BlokusBoard(this);
-		setUpTimer();
-		test();
-		testForPieceFlip();
+		//setUpTimer();
+		setUpPlayers();
+		//test();
+		//testForPieceFlip();
+	}
+
+	private void setUpPlayers() {
+		// TODO Auto-generated method stub
+		player1 = new Player(Color.blue,0);
+		player2 = new Player(Color.yellow,1);
+		player3 = new Player(Color.red,2);
+		player4 = new Player(Color.green,3);
+		playerList.add(player1);
+		playerList.add(player2);
+		playerList.add(player3);
+		playerList.add(player4);
+
 	}
 
 	private void testForPieceFlip() {
@@ -103,7 +118,7 @@ public class BlokusPanel extends JPanel{
 		//piecesAvailable.add(p);
 
 	}
-	private Player whosturn(){
+	public Player whosturn(){
 		int x = GameTurn%4;
 		for(Player z: this.playerList){
 			if(z.getTurn()==x){
@@ -142,12 +157,11 @@ public class BlokusPanel extends JPanel{
 				}
 				boolean remove = false;
 				Player myTurn = whosturn();
-				remove = myTurn.getAvailablePieces().remove(selectedP);
-				if(remove){
-					//GameTurn++;
-				}
+				myTurn.getAvailablePieces().remove(selectedP);
+				System.out.print("Valid move");
 			}
 			else{
+				System.out.println("Invalid move");
 				selectedP.follow(firstClick.getX(), firstClick.getY());
 				repaint();
 			}
@@ -159,11 +173,6 @@ public class BlokusPanel extends JPanel{
 	}
 
 
-	public boolean insideUsablePiece(int x, int y) {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
 	public Block getSelectedBlock() {
 		// TODO Auto-generated method stub
 		return this.selectedB;
@@ -173,6 +182,12 @@ public class BlokusPanel extends JPanel{
 		// TODO Auto-generated method stub
 		return this.selectedP;
 	}
+
+	public void nextTurn() {
+		// TODO Auto-generated method stub
+		this.GameTurn++;
+	}
+
 
 
 
