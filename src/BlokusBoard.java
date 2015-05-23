@@ -112,6 +112,10 @@ public class BlokusBoard {
 	}
 
 	private boolean checkOccupied(Location loc, Color c) {
+		int x = loc.getX();
+		int y = loc.getY();
+		if(x < 0 || y < 0 || x > sizeOfBoard || y > sizeOfBoard)
+			return true;
 		if(arr[loc.getX()][loc.getY()]!=null){
 			return true;
 		}

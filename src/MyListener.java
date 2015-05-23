@@ -49,12 +49,27 @@ public class MyListener extends MouseInputAdapter implements ActionListener {
 			}
 			
 		};
+		Action rotate = new AbstractAction(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				System.out.println("Rotate");
+				if(active){
+					panel.getSelectedPiece().rotate();
+					panel.repaint();
+				}
+			}
+		
+		};
 		
 		panel.getInputMap().put(KeyStroke.getKeyStroke("LEFT"),"flipH");
 		panel.getInputMap().put(KeyStroke.getKeyStroke("RIGHT"), "flipH");
 		panel.getInputMap().put(KeyStroke.getKeyStroke("UP"), "flipV");
 		panel.getInputMap().put(KeyStroke.getKeyStroke("DOWN"), "flipV");
+		panel.getInputMap().put(KeyStroke.getKeyStroke("SPACE"), "rotate");
 
+		panel.getActionMap().put("rotate", rotate);
 		panel.getActionMap().put("flipH", flipH);
 		panel.getActionMap().put("flipH", flipV);
 

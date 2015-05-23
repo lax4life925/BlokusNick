@@ -12,11 +12,11 @@ public class Player {
 	//player yellow's turn = 1
 	//player red's turn = 2
 	//player green's turn = 3
-	public Player(Color c, int x) {
+	public Player(Color c, int t) {
 		// TODO Auto-generated constructor stub
 		usablePieces = new ArrayList<Piece>();
 		Piece.fill(usablePieces,this);
-		turn = x;
+		turn = t;
 		color = c;
 	}
 

@@ -8,4 +8,9 @@ public class Corner extends Piece {
 		blockList.add(new Block(p.getColor(), this, 0, 1));
 		blockList.add(new Block(p.getColor(), this, 1, 0));
 	}
+
+	public Corner(Player p) {
+		// TODO Auto-generated constructor stub
+		this(p,800,700);
+	}
 }

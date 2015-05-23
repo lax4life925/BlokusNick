@@ -33,6 +33,40 @@ public class BlokusPanel extends JPanel{
 		board = new BlokusBoard(this);
 		setUpTimer();
 		test();
+		testForPieceFlip();
+	}
+
+	private void testForPieceFlip() {
+		// TODO Auto-generated method stub
+		Piece p = new Corner(playerList.get(0),10,10);
+		int i = 1;
+		for(Block b : p.blockList){
+			int x = b.getRelativeLoc().getX();
+			int y = b.getRelativeLoc().getY();
+			System.out.println("Block " + i + " x: " + x + " y: " + y);
+			
+			
+		}
+		
+		p.flipHorizontally();
+		System.out.println("Flipped horizontally");
+		for(Block b : p.blockList){
+			int x = b.getRelativeLoc().getX();
+			int y = b.getRelativeLoc().getY();
+			System.out.println("Block " + i + " x: " + x + " y: " + y);
+			
+			
+		}
+		p.flipHorizontally();
+		p.flipVertically();
+		System.out.println("Flipped Vertically");
+		for(Block b : p.blockList){
+			int x = b.getRelativeLoc().getX();
+			int y = b.getRelativeLoc().getY();
+			System.out.println("Block " + i + " x: " + x + " y: " + y);
+			
+			
+		}
 	}
 
 	private void setUpTimer() {
@@ -50,12 +84,12 @@ public class BlokusPanel extends JPanel{
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		board.draw(g);
-		for(Player x: playerList){
-			for(Piece p : x.getAvailablePieces()){
+		if(whosturn() != null)
+			for(Piece p : whosturn().getAvailablePieces()){
 				p.draw(g);
 			}
 		}
-	}
+	
 
 	private void test() {
 		// TODO Auto-generated method stub
@@ -82,7 +116,7 @@ public class BlokusPanel extends JPanel{
 
 	public boolean selectPiece(int x, int y) {
 		Player myTurn = whosturn();
-		if(myTurn!=null&&myTurn.getAvailablePieces().size()>0){
+		if(myTurn!=null && myTurn.getAvailablePieces().size() > 0){
 			for(Piece z: myTurn.getAvailablePieces()){
 				for(Block v: z.blockList){
 					if(v.contains(x,y)){
@@ -112,6 +146,10 @@ public class BlokusPanel extends JPanel{
 				if(remove){
 					//GameTurn++;
 				}
+			}
+			else{
+				selectedP.follow(firstClick.getX(), firstClick.getY());
+				repaint();
 			}
 		}
 		firstClick = null;

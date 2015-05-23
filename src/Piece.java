@@ -19,6 +19,7 @@ public abstract class Piece {
 		for(Block b : blockList){
 			b.setRelativeLoc(b.getRelativeLoc().getX(), b.getRelativeLoc().getY()*-1);
 		}
+		this.resetBlocksLoc();
 	}
 	public void flipHorizontally(){
 		for(Block b : blockList){
@@ -27,6 +28,13 @@ public abstract class Piece {
 		this.resetBlocksLoc();
 	}
 
+	public void rotate(){
+		for(Block b : blockList){
+			int x = b.getRelativeLoc().getX();
+			int y = b.getRelativeLoc().getY();
+			b.setRelativeLoc(y, -1*x);
+		}
+	}
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
 		g.setColor(this.color);
@@ -57,7 +65,7 @@ public abstract class Piece {
 
 	public static void fill(List<Piece> list, Player p) {
 		// TODO Auto-generated method stub
-	//	list.add(new Corner(p));
+		list.add(new Corner(p));
 		}
 
 	public List<Block> getBlockList() {
@@ -67,8 +75,9 @@ public abstract class Piece {
 
 	public void follow(int xx, int yy) {
 		// TODO Auto-generated method stub
-		x = xx;
-		y = yy;
+		int a = Block.SIZE/2;
+		x = xx - a;
+		y = yy - a;
 		resetBlocksLoc();
 	}
 
