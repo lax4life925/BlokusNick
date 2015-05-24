@@ -125,9 +125,9 @@ public class BlokusBoard {
 			int xn = g.getX();
 			int yn = g.getY();
 			if(onGrid(g)){
-				if(arr[xn][yn]!=null){
+				if(checkOccupied(g,c)){
 					if(arr[xn][yn].getColor().equals(c)){
-						//System.out.println("it's true!!");
+						System.out.println("Invalid play adjacent");
 						return true;
 					}
 				}
@@ -136,14 +136,15 @@ public class BlokusBoard {
 		return false;
 	}
 
+	//checks if spot is occupied or off the board
+	//returns true if occupied or off board
 	private boolean checkOccupied(Location loc, Color c) {
 		int x = loc.getX();
 		int y = loc.getY();
-		if(x < 0 || y < 0 || x > sizeOfBoard || y > sizeOfBoard)
-			return true;
-		if(arr[loc.getX()][loc.getY()]!=null){
-			return true;
-		}
+		if(onGrid(loc))
+			if(arr[loc.getX()][loc.getY()]!=null)
+				return true;
+			
 		return false;
 	}
 
@@ -157,8 +158,9 @@ public class BlokusBoard {
 		blokusPanel.nextTurn();
 		blokusPanel.repaint();
 	}
+	
 	public boolean onGrid (Location loc){
-		if(loc.getX()>0&&loc.getX()<=sizeOfBoard&&loc.getY()>0&&loc.getY()<=sizeOfBoard)
+		if(loc.getX()> 0 && loc.getX()<=sizeOfBoard && loc.getY()>0 && loc.getY()<=sizeOfBoard)
 			return true;
 		return false;	
 	}
